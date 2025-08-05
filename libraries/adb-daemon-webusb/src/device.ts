@@ -147,7 +147,7 @@ export class AdbDaemonWebUsbConnection
                         try {
                             await device.raw.transferOut(
                                 outEndpoint.endpointNumber,
-                                chunk,
+                                chunk as unknown as BufferSource,
                             );
 
                             // In USB protocol, a not-full packet indicates the end of a transfer.
