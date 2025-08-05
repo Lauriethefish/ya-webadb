@@ -1,6 +1,7 @@
 import { Consumable, TransformStream } from "@yume-chan/stream-extra";
 import type { StructInit, StructValue } from "@yume-chan/struct";
 import { buffer, extend, s32, struct, u32 } from "@yume-chan/struct";
+import { packetListeners } from "../packetLogger.js";
 
 export const AdbCommand = {
     Auth: 0x48545541, // 'AUTH'
@@ -65,6 +66,10 @@ export class AdbPacketSerializeStream extends TransformStream<
         super({
             transform: async (chunk, controller) => {
                 await chunk.tryConsume(async (chunk) => {
+                    if(packetListeners.onPacketWritten !== null) {
+                        packetListeners.onPacketWritten(chunk);
+                    }
+
                     const init = chunk as AdbPacketInit & AdbPacketHeaderInit;
                     init.payloadLength = init.payload.length;
 

@@ -3,6 +3,9 @@ import type {
     AdbPacketData,
     AdbPacketInit,
 } from "@yume-chan/adb";
+
+import { packetListeners } from "@yume-chan/adb";
+
 import {
     AdbPacketHeader,
     AdbPacketSerializeStream,
@@ -204,6 +207,9 @@ export class AdbDaemonWebUsbConnection
                     packet.payload = new Uint8Array(result.data!.buffer);
                 } else {
                     packet.payload = EmptyUint8Array;
+                }
+                if(packetListeners.onPacketRead !== null) {
+                    packetListeners.onPacketRead(packet);
                 }
 
                 return packet;

@@ -71,3 +71,4 @@ dts
 esm
 dist
 *.tsbuildinfo
+*.js
