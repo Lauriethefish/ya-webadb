@@ -30,7 +30,7 @@ export async function aoaHidSetReportDescriptor(
             value: accessoryId,
             index: 0,
         },
-        reportDescriptor,
+        reportDescriptor as unknown as BufferSource,
     );
 }
 
@@ -60,7 +60,7 @@ export async function aoaHidSendInputReport(
             value: accessoryId,
             index: 0,
         },
-        event,
+        event as unknown as BufferSource,
     );
 }
 
