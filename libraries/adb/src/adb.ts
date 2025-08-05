@@ -18,8 +18,6 @@ import {
 } from "./commands/index.js";
 import type { AdbFeature } from "./features.js";
 
-export { packetListeners } from "./packetLogger.js";
-
 export interface Closeable {
     close(): MaybePromiseLike<void>;
 }
